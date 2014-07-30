@@ -2,9 +2,9 @@
 
 var crypto = require('crypto');
 var fs = require('fs');
-var md5sum = crypto.createHash('md5');
 
 var md5pf = function(file, start, end, cb) {
+  var md5sum = crypto.createHash('md5');
   var length = end - start;
   var buffer = new Buffer(length);
   fs.open(file, 'r', function(err, fd) {
