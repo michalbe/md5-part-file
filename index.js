@@ -3,7 +3,7 @@
 var crypto = require('crypto');
 var fs = require('fs');
 
-var md5pf = function(file, start, end, cb) {
+module.exports = function(file, start, end, cb) {
   var md5sum = crypto.createHash('md5');
   var length = end - start;
   var buffer = new Buffer(length);
@@ -12,16 +12,15 @@ var md5pf = function(file, start, end, cb) {
       console.log(err);
       return;
     }
-    fs.read(fd, buffer, 0, length, 0, function() {
-      md5sum.update(buffer);
+    fs.read(fd, buffer, 0, length, 0, function(err, bufferLength) {
+      if (err){
+        console.log(err);
+        return;
+      }
+      md5sum.update(buffer.toString('utf-8', 0, bufferLength));
       fs.close(fd, function(){
         cb(md5sum.digest('hex'));
-      })
+      });
     });
   });
 };
-
-
-md5pf('README.md', 0, 1024, function(hash){
-  console.log('hash', hash);
-});
