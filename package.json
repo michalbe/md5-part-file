@@ -1,6 +1,6 @@
 {
   "name": "md5-part-file",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Michał Budzyński <michal@virtualdesign.pl>",
   "repository": "git@github.com:michalbe/md5-part-file.git",
   "devDependencies": {
