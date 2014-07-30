@@ -23,7 +23,11 @@ module.exports = function(file, start, end, cb) {
       }
       // file could be smaller than number of bytes we are interested in, so
       // truncate the buffer and calculate MD5 hash from the truncated part
-      md5sum.update(buffer.toString('utf-8', 0, bufferLength));
+      if (bufferLength < length) {
+        md5sum.update(buffer.toString('utf-8', 0, bufferLength));
+      } else {
+        md5sum.update(buffer);
+      }
       fs.close(fd, function() {
         // return proper hash to callback
         cb(null, md5sum.digest('hex'));
