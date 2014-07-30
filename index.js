@@ -14,7 +14,9 @@ var md5pf = function(file, start, end, cb) {
     }
     fs.read(fd, buffer, 0, length, 0, function() {
       md5sum.update(buffer);
-      cb(md5sum.digest('hex'));
+      fs.close(fd, function(){
+        cb(md5sum.digest('hex'));
+      })
     });
   });
 };
