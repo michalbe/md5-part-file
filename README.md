@@ -1,5 +1,5 @@
 # md5-part-file by [@michalbe](http://github.com/michalbe) #
-Calculate partial md5 hash of the file
+Calculate md5 hash of only part of the file
 
 ### How to use: ###
 ```
