@@ -1,7 +1,8 @@
 'use strict';
 
-var md5 = require('md5-o-matic');
+var crypto = require('crypto');
 var fs = require('fs');
+var md5sum = crypto.createHash('md5');
 
 var md5pf = function(file, start, end, cb) {
   var length = end - start;
@@ -11,13 +12,14 @@ var md5pf = function(file, start, end, cb) {
       console.log(err);
       return;
     }
-    fs.read(fd, buffer, 0, length, 0, function(){
-      cb(md5(buffer.toString()));
+    fs.read(fd, buffer, 0, length, 0, function() {
+      md5sum.update(buffer);
+      cb(md5sum.digest('hex'));
     });
   });
 };
 
 
-md5pf('README.md', 0, 1023, function(hash){
+md5pf('README.md', 0, 1024, function(hash){
   console.log('hash', hash);
 });
