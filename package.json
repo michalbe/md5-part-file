@@ -9,6 +9,10 @@
     "precommit-hook": "^1.0.5"
   },
   "scripts": {
-    "lint": "node node_modules/jshint/bin/jshint ."
+    "lint": "node node_modules/jshint/bin/jshint .",
+    "test": "node tests/md5-part-file-tests.js"
+  },
+  "dependencies": {
+    "read-part-file": "^1.0.1"
   }
 }
